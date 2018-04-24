@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define IN 0
+#define OUT 1
+int main() {
+	char c;
+	int nc, nl, nw;
+	nc = nl = nw = 0;
+	int status = OUT;
+	while ((c = getchar()) != EOF)
+	{
+		nc++;
+		if (c == '\n')nl++;
+		if (isspace(c))status = OUT;
+		else if (status == OUT) {
+			nw++;
+			status = IN;
+		}
+	}
+	printf("nc=%d,nl=%d,nw=%d\n", nc, nl, nw);
+		
+	system("pause");
+	return 0;
+ 
+}
