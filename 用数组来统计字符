@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+	int ndigit[10] = { 0 };
+	int nwhite, nother;
+	nwhite = nother = 0;
+	int ch;
+	while ((ch = getchar()) != EOF) {
+		if ('0' <= ch && ch <= '9') ndigit[ch - '0']++;
+		else if (ch == '\t' || ch == '\n' || ch == ' ') nwhite++;
+		else nother++;
+	}
+	int i;
+	for (i = 0;i<10;i++) printf("%d\n", ndigit[i]);
+	printf("nother=%d,nwhiter=%d\n", nother, nwhite);
+	system("pause");
+	return 0;
+}
