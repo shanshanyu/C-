@@ -13,13 +13,13 @@ int getString(char ***p, int n,char **p1,int len1,char (*p2)[30],int len2) {
 		len = strlen(p1[i]);
 		tmp[i] = (char *)malloc(len + 1);//这里要判断
 		strcpy(tmp[i], p1[i]);
-		tmp[i][len] = '\0';
+		//tmp[i][len] = '\0';    copy已经把'\0' copy进去了
 	}
 	for (j = 0;j < len2;j++) {
 		len = strlen(p2[j]);
 		tmp[i] = (char *)malloc(len+1); //这里要判断
 		strcpy(tmp[i], p2[j]);
-		tmp[i][len] = '\0';
+		//tmp[i][len] = '\0';
 		i++;
 	}
 	*p = tmp;
