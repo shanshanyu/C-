@@ -1,0 +1,60 @@
+//将存储在二维数组和指针数组的字符串放入堆空间中，同时对字符串进行排序
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int getString(char ***p, int n,char **p1,int len1,char (*p2)[30],int len2) {
+	char **tmp = (char **)malloc(sizeof(char *)*n);//分配一维
+	if (!tmp) return -1;
+	int i,j, len;
+	for (i = 0;i < len1;i++) {
+		len = strlen(p1[i]);
+		tmp[i] = (char *)malloc(len + 1);//这里要判断
+		strcpy(tmp[i], p1[i]);
+		tmp[i][len] = '\0';
+	}
+	for (j = 0;j < len2;j++) {
+		len = strlen(p2[j]);
+		tmp[i] = (char *)malloc(len+1); //这里要判断
+		strcpy(tmp[i], p2[j]);
+		tmp[i][len] = '\0';
+		i++;
+	}
+	*p = tmp;
+	return 0;
+}
+
+int sortString(char **p, int n) {
+	if (p == NULL) return -1;
+	char *tmp;
+	int i, j;
+	for (i = 0;i < n - 1;i++)
+		for (j = i + 1;j < n;j++)
+			if (strcmp(p[i], p[j]) > 0) {
+				tmp = p[i];
+				p[i] = p[j];
+				p[j] = tmp;
+			}
+	return 0;
+}
+
+int main() {
+	char *p1[] = { "22222","11111","33333" };
+	char  p2[4][30] = { "aaaa","bbbb","cccc","zzzz"};
+	char **p3 = NULL;
+	int n, len1, len2;
+	len1 = sizeof(p1) / sizeof(p1[0]);
+	len2= sizeof(p2) / sizeof(p2[0]);
+	n = len1 + len2;
+	int ret = getString(&p3, n,p1,len1,p2,len2);
+	if (ret != 0) return -1;
+
+	ret=sortString(p3, n);
+	if (ret != 0) return -1;
+	int i;
+	for (i = 0;i < n;i++)
+		printf("%s ", p3[i]);
+	system("pause");
+}
